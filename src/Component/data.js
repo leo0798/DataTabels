@@ -7,16 +7,17 @@ const ProductPage = () => {
     const getProducts = async (callback) => {
         let result = await fetch('https://dummyjson.com/products');
         result = await result.json();
-        callback(result.products);
+         callback(result.products);
       };
 
-    const [products, setProducts] = useState({});
+    const [products, setProducts] = useState([]);
+ 
 
     useEffect(() => {
     getProducts((cb) => {
       setProducts(cb);
     });
-  }, []);
+  }, [products]);
 
 
     return (
@@ -39,7 +40,7 @@ const ProductPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => {
+                {products?.map((product) => {
                   const { id, title, brand,description, category, price, rating, stock } = product;
                   return (
                     <tr>
